@@ -4,7 +4,7 @@ namespace CommandApplication.Commands
 {
 	public class CloseSwitch : ICommand
 	{
-		public ISwitchable Switchable { get; }
+		public ISwitchable Switchable { get; set; }
 
 		public CloseSwitch(ISwitchable switchable)
 		{

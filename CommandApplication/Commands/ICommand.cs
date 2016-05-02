@@ -4,7 +4,7 @@ namespace CommandApplication.Commands
 {
 	public interface ICommand
 	{
-		ISwitchable Switchable { get; }
+		ISwitchable Switchable { get; set; }
 		void Execute();
 	}
 }

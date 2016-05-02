@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 using Autofac.Core;
 using CommandApplication.Commands;
@@ -20,19 +22,25 @@ namespace CommandApplication
 
 			ISwitch invoker;
 			ISwitchable lamp;
-
+			//ICommand switchClose;
+			IEnumerable<ICommand> commands;
 			using (var scope = Container.BeginLifetimeScope())
 			{
 				lamp = scope.Resolve<ISwitchable>();
 				//invoker = scope.Resolve<ISwitch>();
 				//var x = scope.Resolve<ISwitch>().
+				//switchClose = scope.Resolve<ICommand>(new List<Parameter> {new NamedParameter("CloseSwitch", typeof (CloseSwitch))});
+				//switchClose = scope.Resolve<ICommand>(new NamedParameter("Switchable", typeof(CloseSwitch)));
+				commands = scope.Resolve<IEnumerable<ICommand>>();
+
 
 			}
 
 
 
 			//ISwitchable lamp = new Light();
-			ICommand switchClose = new CloseSwitch(lamp);
+			ICommand switchClose = commands.First();
+			switchClose.Switchable = lamp;// new CloseSwitch(lamp);
 			ICommand switchOpen = new OpenSwitch(lamp);
 
 			invoker = new Switch(switchClose, switchOpen);

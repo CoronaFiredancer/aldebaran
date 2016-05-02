@@ -4,7 +4,7 @@ namespace CommandApplication.Commands
 {
 	public class OpenSwitch : ICommand
 	{
-		public ISwitchable Switchable { get; }
+		public ISwitchable Switchable { get; set; }
 
 		public OpenSwitch(ISwitchable switchable)
 		{
