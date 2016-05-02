@@ -1,5 +1,7 @@
 ﻿using System;
 using Autofac;
+using CommandApplication.Commands;
+using CommandApplication.Switchables;
 
 namespace CommandApplication
 {
@@ -12,8 +14,8 @@ namespace CommandApplication
 
 			builder.RegisterType<Light>().As<ISwitchable>();
 			builder.RegisterType<Valve>().As<ISwitchable>();
-			builder.RegisterType<CloseSwitchCommand>().As<ICommand>();
-			builder.RegisterType<OpenSwitchCommand>().As<ICommand>();
+			builder.RegisterType<CloseSwitch>().As<ICommand>();
+			builder.RegisterType<OpenSwitch>().As<ICommand>();
 
 			Container = builder.Build();
 
@@ -21,10 +23,10 @@ namespace CommandApplication
 
 
 			ISwitchable lamp = new Light();
-			ISwitchable flowValve = new Valve();
+			
 
-			ICommand switchClose = new CloseSwitchCommand(lamp);
-			ICommand switchOpen = new OpenSwitchCommand(lamp);
+			ICommand switchClose = new CloseSwitch(lamp);
+			ICommand switchOpen = new OpenSwitch(lamp);
 
 			var invoker = new Switch(switchClose, switchOpen);
 			var input = Console.ReadLine();
@@ -43,10 +45,12 @@ namespace CommandApplication
 				input = Console.ReadLine();
 			}
 
-			switchClose.Switchable = flowValve;
-			switchOpen.Switchable = flowValve;
 
-			var ventil = new Switch(switchClose, switchOpen);
+			ISwitchable flowValve = new Valve();
+			ICommand valveClose = new CloseSwitch(flowValve);
+			ICommand valveOpen = new OpenSwitch(flowValve);
+			
+			var ventil = new Switch(valveClose, valveOpen);
 			input = "";
 			
 			while (input != null && input != "x")

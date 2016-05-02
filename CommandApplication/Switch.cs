@@ -1,4 +1,5 @@
 ﻿using System;
+using CommandApplication.Commands;
 
 namespace CommandApplication
 {
@@ -6,34 +7,34 @@ namespace CommandApplication
 	{
 		private readonly ICommand _closedCommand;
 		private readonly ICommand _openedCommand;
-		private ICommand lastExecuted;
+		private ICommand _lastExecuted;
 
 		public Switch(ICommand closedCommand, ICommand openedCommand)
 		{
 			_closedCommand = closedCommand;
 			_openedCommand = openedCommand;
-			lastExecuted = null;
+			_lastExecuted = null;
 		}
 
 		public void Close()
 		{
-			if(lastExecuted == _closedCommand)
+			if(_lastExecuted == _closedCommand)
 			{
 				Console.WriteLine("Already closed");
 				return;
 			}
-			lastExecuted = _closedCommand;
+			_lastExecuted = _closedCommand;
 			_closedCommand.Execute();
 		}
 
 		public void Open()
 		{
-			if(lastExecuted == _openedCommand)
+			if(_lastExecuted == _openedCommand)
 			{
 				Console.WriteLine("Already open");
 				return;
 			}
-			lastExecuted = _openedCommand;
+			_lastExecuted = _openedCommand;
 			_openedCommand.Execute();
 		}
 
