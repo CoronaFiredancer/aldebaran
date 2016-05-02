@@ -49,7 +49,7 @@ namespace CommandApplication
 			ISwitchable flowValve = new Valve();
 			ICommand valveClose = new CloseSwitch(flowValve);
 			ICommand valveOpen = new OpenSwitch(flowValve);
-			
+			 
 			var ventil = new Switch(valveClose, valveOpen);
 			input = "";
 			

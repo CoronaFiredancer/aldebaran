@@ -1,4 +1,6 @@
-﻿namespace CommandApplication.Commands
+﻿using CommandApplication.Switchables;
+
+namespace CommandApplication.Commands
 {
 	public interface ICommand
 	{

@@ -1,4 +1,4 @@
-﻿namespace CommandApplication
+﻿namespace CommandApplication.Switchables
 {
 	public interface ISwitchable
 	{

@@ -26,11 +26,11 @@
   <Class Name="CommandApplication.Switch">
     <Position X="7.5" Y="0.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAEIAAAAAAAAAAAAAAAAAIAAAAAAACAAAA=</HashCode>
+      <HashCode>ACAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAACAABA=</HashCode>
       <FileName>Switch.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CommandApplication.Valve" BaseTypeListCollapsed="true">
+  <Class Name="CommandApplication.Switchables.Valve" BaseTypeListCollapsed="true">
     <Position X="5.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
@@ -53,7 +53,7 @@
       <FileName>Commands\ICommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="CommandApplication.ISwitchable">
+  <Interface Name="CommandApplication.Switchables.ISwitchable">
     <Position X="2.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>

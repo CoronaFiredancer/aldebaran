@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommandApplication
+namespace CommandApplication.Switchables
 {
 	public class Valve : ISwitchable
 	{
