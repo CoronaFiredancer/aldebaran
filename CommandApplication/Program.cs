@@ -1,7 +1,9 @@
 ﻿using System;
 using Autofac;
 using CommandApplication.Commands;
+using CommandApplication.Containers;
 using CommandApplication.Switchables;
+using CommandApplication.Switches;
 
 namespace CommandApplication
 {
@@ -10,25 +12,25 @@ namespace CommandApplication
 		private static IContainer Container { get; set; }
 		static void Main(string[] args)
 		{
-			var builder = new ContainerBuilder();
-
-			builder.RegisterType<Light>().As<ISwitchable>();
-			builder.RegisterType<Valve>().As<ISwitchable>();
-			builder.RegisterType<CloseSwitch>().As<ICommand>();
-			builder.RegisterType<OpenSwitch>().As<ICommand>();
-
-			Container = builder.Build();
+			var containerSetup = new ContainerSetup();
+			Container = containerSetup.BuildContainer();
 
 
+
+
+			ICommand switchCloseCommand;
+
+			using (var scope = Container.BeginLifetimeScope())
+			{
+				switchCloseCommand = scope.Resolve<ICommand>();
+			}
 
 
 			ISwitchable lamp = new Light();
-			
-
 			ICommand switchClose = new CloseSwitch(lamp);
 			ICommand switchOpen = new OpenSwitch(lamp);
 
-			var invoker = new Switch(switchClose, switchOpen);
+			var invoker = new Switch(switchCloseCommand, switchOpen);
 			var input = Console.ReadLine();
 
 			while (input != null && input != "x")

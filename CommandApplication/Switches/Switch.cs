@@ -1,9 +1,9 @@
 ﻿using System;
 using CommandApplication.Commands;
 
-namespace CommandApplication
+namespace CommandApplication.Switches
 {
-	public class Switch
+	public class Switch : ISwitch
 	{
 		private readonly ICommand _closedCommand;
 		private readonly ICommand _openedCommand;
