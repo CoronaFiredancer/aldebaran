@@ -4,12 +4,12 @@ namespace CommandApplication.Switchables
 {
 	public class Valve : ISwitchable
 	{
-		public void Open()
+		public void OpenTheSwitch()
 		{
 			Console.WriteLine("Valve open");
 		}
 
-		public void Close()
+		public void CloseTheSwitch()
 		{
 			Console.WriteLine("Valve is now closed");
 		}

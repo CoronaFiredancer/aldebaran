@@ -13,7 +13,7 @@ namespace CommandApplication.Commands
 
 		public void Execute()
 		{
-			Switchable.Open();
+			Switchable.OpenTheSwitch();
 		}
 	}
 }

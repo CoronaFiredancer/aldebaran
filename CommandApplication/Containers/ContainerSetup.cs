@@ -1,11 +1,7 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommandApplication.Commands;
 using CommandApplication.Switchables;
+using CommandApplication.Switches;
 
 namespace CommandApplication.Containers
 {
@@ -17,11 +13,22 @@ namespace CommandApplication.Containers
 		{
 			_builder = new ContainerBuilder();
 
-			_builder.RegisterType<Light>().As<ISwitchable>();
+			
+			
 
-			//builder.RegisterType<Valve>().As<ISwitchable>();
 			_builder.RegisterType<CloseSwitch>().As<ICommand>();
 			_builder.RegisterType<OpenSwitch>().As<ICommand>();
+			//_builder.Register(s => )
+			_builder.RegisterType<Switch>()
+				.As<ISwitch>()
+				.WithParameter("_closedCommand", typeof(CloseSwitch))
+				.WithParameter("_openedCommand", typeof(OpenSwitch));
+
+			_builder.RegisterType<Light>().As<ISwitchable>();
+
+			//_builder.Register(ctx => new Switch(ctx.Resolve<CloseSwitch>(), ctx.Resolve<OpenSwitch>()));
+
+			
 
 			return _builder.Build();
 		}

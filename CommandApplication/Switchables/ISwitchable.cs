@@ -2,7 +2,7 @@
 {
 	public interface ISwitchable
 	{
-		void Open();
-		void Close();
+		void OpenTheSwitch();
+		void CloseTheSwitch();
 	}
 }

@@ -12,7 +12,7 @@ namespace CommandApplication.Commands
 		}
 		public void Execute()
 		{
-			Switchable.Close();
+			Switchable.CloseTheSwitch();
 		}
 	}
 }

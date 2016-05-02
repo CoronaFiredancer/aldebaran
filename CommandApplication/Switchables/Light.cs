@@ -4,12 +4,12 @@ namespace CommandApplication.Switchables
 {
 	public class Light : ISwitchable
 	{
-		public void Open()
+		public void OpenTheSwitch()
 		{
 			Console.WriteLine("The light is on");
 		}
 
-		public void Close()
+		public void CloseTheSwitch()
 		{
 			Console.WriteLine("The light is now turned off");
 		}

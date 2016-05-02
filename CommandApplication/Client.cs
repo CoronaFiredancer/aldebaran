@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using Autofac.Core;
 using CommandApplication.Commands;
 using CommandApplication.Containers;
 using CommandApplication.Switchables;
@@ -7,7 +8,7 @@ using CommandApplication.Switches;
 
 namespace CommandApplication
 {
-	class Program
+	class Client
 	{
 		private static IContainer Container { get; set; }
 		static void Main(string[] args)
@@ -17,20 +18,24 @@ namespace CommandApplication
 
 
 
-
-			ICommand switchCloseCommand;
+			ISwitch invoker;
+			ISwitchable lamp;
 
 			using (var scope = Container.BeginLifetimeScope())
 			{
-				switchCloseCommand = scope.Resolve<ICommand>();
+				lamp = scope.Resolve<ISwitchable>();
+				//invoker = scope.Resolve<ISwitch>();
+				//var x = scope.Resolve<ISwitch>().
+
 			}
 
 
-			ISwitchable lamp = new Light();
+
+			//ISwitchable lamp = new Light();
 			ICommand switchClose = new CloseSwitch(lamp);
 			ICommand switchOpen = new OpenSwitch(lamp);
 
-			var invoker = new Switch(switchCloseCommand, switchOpen);
+			invoker = new Switch(switchClose, switchOpen);
 			var input = Console.ReadLine();
 
 			while (input != null && input != "x")
