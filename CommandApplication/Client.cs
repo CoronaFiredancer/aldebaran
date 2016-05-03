@@ -22,29 +22,23 @@ namespace CommandApplication
 
 			ISwitch invoker;
 			ISwitchable lamp;
-			//ICommand switchClose;
 			IEnumerable<ICommand> commands;
 			using (var scope = Container.BeginLifetimeScope())
 			{
 				lamp = scope.Resolve<ISwitchable>();
-				//invoker = scope.Resolve<ISwitch>();
-				//var x = scope.Resolve<ISwitch>().
-				//switchClose = scope.Resolve<ICommand>(new List<Parameter> {new NamedParameter("CloseSwitch", typeof (CloseSwitch))});
-				//switchClose = scope.Resolve<ICommand>(new NamedParameter("Switchable", typeof(CloseSwitch)));
 				commands = scope.Resolve<IEnumerable<ICommand>>();
 
+				var commandsList = commands.ToList();
 
+				var switchClose = commandsList[0];
+				switchClose.Switchable = lamp;
+				var switchOpen = commandsList[1];
+				switchOpen.Switchable = lamp;
+
+				invoker = new Switch(switchClose, switchOpen);
 			}
 
-			List<ICommand> commandsList = commands.ToList();
 
-			//ISwitchable lamp = new Light();
-			ICommand switchClose = commandsList[0];//.First();
-			switchClose.Switchable = lamp;// new CloseSwitch(lamp);
-			ICommand switchOpen = commandsList[1];// new OpenSwitch(lamp);
-			switchOpen.Switchable = lamp;
-
-			invoker = new Switch(switchClose, switchOpen);
 			var input = Console.ReadLine();
 
 			while (input != null && input != "x")
