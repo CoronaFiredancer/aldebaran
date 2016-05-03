@@ -36,7 +36,8 @@ namespace CommandApplication
 				switchOpen.Switchable = lamp;
 
 				invoker = new Switch(switchClose, switchOpen);
-				//invoker.
+				invoker.AddCommand(switchOpen);
+				invoker.AddCommand(switchClose);
 
 
 				var input = Console.ReadLine();
@@ -50,7 +51,8 @@ namespace CommandApplication
 							invoker.FireCommand(switchOpen);
 							break;
 						case "c":
-							invoker.Close();
+							//invoker.Close();
+							invoker.FireCommand(switchClose);
 							break;
 					}
 					input = Console.ReadLine();

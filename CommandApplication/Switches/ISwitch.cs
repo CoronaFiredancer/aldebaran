@@ -7,5 +7,7 @@ namespace CommandApplication.Switches
 		void Open();
 		void Close();
 		void FireCommand(ICommand command);
+		void AddCommand(ICommand command);
+		void RemoveCommand(ICommand command);
 	}
 }

@@ -52,6 +52,15 @@ namespace CommandApplication.Switches
 			_lastExecuted = _openedCommand;
 			_openedCommand.Execute();
 		}
+		public void AddCommand(ICommand command)
+		{
+			_commands.Add(command);
+		}
+
+		public void RemoveCommand(ICommand command)
+		{
+			_commands.Remove(command);
+		}
 
 	}
 }
