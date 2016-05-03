@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommandApplication.Commands;
 
 namespace CommandApplication.Switches
@@ -8,9 +10,11 @@ namespace CommandApplication.Switches
 		private readonly ICommand _closedCommand;
 		private readonly ICommand _openedCommand;
 		private ICommand _lastExecuted;
+		private List<ICommand> _commands;
 
 		public Switch(ICommand closedCommand, ICommand openedCommand)
 		{
+			_commands = new List<ICommand>();
 			_closedCommand = closedCommand;
 			_openedCommand = openedCommand;
 			_lastExecuted = null;
@@ -25,6 +29,17 @@ namespace CommandApplication.Switches
 			}
 			_lastExecuted = _closedCommand;
 			_closedCommand.Execute();
+		}
+
+		public void FireCommand(ICommand command)
+		{
+			var executor = _commands.FirstOrDefault(x => x.Equals(command));
+			if (executor != null && executor.Equals(_lastExecuted))
+			{
+				Console.WriteLine($"Cannot execute {executor.GetType().Name} again");
+			}
+			_lastExecuted = executor;
+			executor?.Execute();
 		}
 
 		public void Open()

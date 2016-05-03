@@ -36,45 +36,47 @@ namespace CommandApplication
 				switchOpen.Switchable = lamp;
 
 				invoker = new Switch(switchClose, switchOpen);
-			}
+				//invoker.
 
 
-			var input = Console.ReadLine();
+				var input = Console.ReadLine();
 
-			while (input != null && input != "x")
-			{
-				switch (input)
+				while (input != null && input != "x")
 				{
-					case "o":
-						invoker.Open();
-						break;
-					case "c":
-						invoker.Close();
-						break;
+					switch (input)
+					{
+						case "o":
+							//invoker.Open();
+							invoker.FireCommand(switchOpen);
+							break;
+						case "c":
+							invoker.Close();
+							break;
+					}
+					input = Console.ReadLine();
 				}
-				input = Console.ReadLine();
-			}
 
 
-			ISwitchable flowValve = new Valve();
-			ICommand valveClose = new CloseSwitch(flowValve);
-			ICommand valveOpen = new OpenSwitch(flowValve);
-			 
-			var ventil = new Switch(valveClose, valveOpen);
-			input = "";
-			
-			while (input != null && input != "x")
-			{
-				switch (input)
+				ISwitchable flowValve = new Valve();
+				ICommand valveClose = new CloseSwitch(flowValve);
+				ICommand valveOpen = new OpenSwitch(flowValve);
+
+				var ventil = new Switch(valveClose, valveOpen);
+				input = "";
+
+				while (input != null && input != "x")
 				{
-					case "o":
-						ventil.Open();
-						break;
-					case "c":
-						ventil.Close();
-						break;
+					switch (input)
+					{
+						case "o":
+							ventil.Open();
+							break;
+						case "c":
+							ventil.Close();
+							break;
+					}
+					input = Console.ReadLine();
 				}
-				input = Console.ReadLine();
 			}
 		}
 	}
