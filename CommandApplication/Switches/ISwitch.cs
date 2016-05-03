@@ -1,13 +1,13 @@
-﻿using CommandApplication.Commands;
+﻿using System.Collections.Generic;
+using CommandApplication.Commands;
 
 namespace CommandApplication.Switches
 {
-	public interface ISwitch
+	public abstract class ISwitch
 	{
-		//void Open();
-		//void Close();
-		void FireCommand(ICommand command);
-		void AddCommand(ICommand command);
-		void RemoveCommand(ICommand command);
+		public List<ICommand> Commands;
+		public abstract void FireCommand(ICommand command);
+		public abstract void AddCommand(ICommand command);
+		public abstract void RemoveCommand(ICommand command);
 	}
 }

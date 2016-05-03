@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientExecutor.cs" />
     <Compile Include="Commands\CloseSwitch.cs" />
     <Compile Include="Commands\Composite.cs" />
     <Compile Include="Commands\ICommand.cs" />

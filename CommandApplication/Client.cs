@@ -10,7 +10,7 @@ using CommandApplication.Switches;
 
 namespace CommandApplication
 {
-	class Client
+	internal class Client
 	{
 		private static IContainer Container { get; set; }
 		static void Main(string[] args)
@@ -19,14 +19,10 @@ namespace CommandApplication
 			Container = containerSetup.BuildContainer();
 
 
-
-			ISwitch invoker;
-			ISwitchable lamp;
-			IEnumerable<ICommand> commands;
 			using (var scope = Container.BeginLifetimeScope())
 			{
-				lamp = scope.Resolve<ISwitchable>();
-				commands = scope.Resolve<IEnumerable<ICommand>>();
+				var lamp = scope.Resolve<IEnumerable<ISwitchable>>().ToList()[0];
+				var commands = scope.Resolve<IEnumerable<ICommand>>();
 
 				var commandsList = commands.ToList();
 
@@ -35,52 +31,27 @@ namespace CommandApplication
 				var switchOpen = commandsList[1];
 				switchOpen.Switchable = lamp;
 
-				invoker = new Switch(switchClose, switchOpen);
+				ISwitch invoker = new Switch();
 				invoker.AddCommand(switchOpen);
 				invoker.AddCommand(switchClose);
 
-
-				var input = Console.ReadLine();
-
-				while (input != null && input != "x")
-				{
-					switch (input)
-					{
-						case "o":
-							//invoker.Open();
-							invoker.FireCommand(switchOpen);
-							break;
-						case "c":
-							//invoker.Close();
-							invoker.FireCommand(switchClose);
-							break;
-					}
-					input = Console.ReadLine();
-				}
+				ClientExecutor.Execute(invoker);
 
 
-				ISwitchable flowValve = new Valve();
-				ICommand valveClose = new CloseSwitch(flowValve);
-				ICommand valveOpen = new OpenSwitch(flowValve);
+				var flowValve = scope.Resolve<IEnumerable<ISwitchable>>().ToList()[1];
 
-				var ventil = new Switch(valveClose, valveOpen);
-				input = "";
+				var valveClose = commandsList[0];
+				valveClose.Switchable = flowValve;
 
-				while (input != null && input != "x")
-				{
-					switch (input)
-					{
-						case "o":
-							//ventil.Open();
-							ventil.FireCommand(valveOpen);
-							break;
-						case "c":
-							//ventil.Close();
-							ventil.FireCommand(valveClose);
-							break;
-					}
-					input = Console.ReadLine();
-				}
+				var valveOpen = commandsList[1];
+				valveOpen.Switchable = flowValve;
+
+				var ventil = new Switch();
+				ventil.AddCommand(valveOpen);
+				ventil.AddCommand(valveClose);
+
+				ClientExecutor.Execute(ventil);
+
 			}
 		}
 	}

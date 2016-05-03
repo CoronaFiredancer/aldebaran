@@ -7,35 +7,16 @@ namespace CommandApplication.Switches
 {
 	public class Switch : ISwitch
 	{
-		private readonly ICommand _closedCommand;
-		private readonly ICommand _openedCommand;
 		private ICommand _lastExecuted;
-		private List<ICommand> _commands;
-
-		public Switch(ICommand closedCommand, ICommand openedCommand)
+		
+		public Switch()
 		{
-			_commands = new List<ICommand>();
-			_closedCommand = closedCommand;
-			_openedCommand = openedCommand;
+			Commands = new List<ICommand>();
 			_lastExecuted = null;
 		}
-
-		/*
-		public void Close()
+		public override void FireCommand(ICommand command)
 		{
-			if(_lastExecuted == _closedCommand)
-			{
-				Console.WriteLine("Already closed");
-				return;
-			}
-			_lastExecuted = _closedCommand;
-			_closedCommand.Execute();
-		}
-		*/
-
-		public void FireCommand(ICommand command)
-		{
-			var executor = _commands.FirstOrDefault(x => x.Equals(command));
+			var executor = Commands.FirstOrDefault(x => x.Equals(command));
 			if (executor != null && executor.Equals(_lastExecuted))
 			{
 				Console.WriteLine($"Cannot execute {executor.GetType().Name} again");
@@ -45,26 +26,13 @@ namespace CommandApplication.Switches
 			executor?.Execute();
 		}
 
-		/*
-		public void Open()
+		public override void AddCommand(ICommand command)
 		{
-			if(_lastExecuted == _openedCommand)
-			{
-				Console.WriteLine("Already open");
-				return;
-			}
-			_lastExecuted = _openedCommand;
-			_openedCommand.Execute();
+			Commands.Add(command);
 		}
-		*/
-		public void AddCommand(ICommand command)
+		public override void RemoveCommand(ICommand command)
 		{
-			_commands.Add(command);
-		}
-
-		public void RemoveCommand(ICommand command)
-		{
-			_commands.Remove(command);
+			Commands.Remove(command);
 		}
 
 	}
