@@ -20,6 +20,7 @@ namespace CommandApplication.Switches
 			_lastExecuted = null;
 		}
 
+		/*
 		public void Close()
 		{
 			if(_lastExecuted == _closedCommand)
@@ -30,6 +31,7 @@ namespace CommandApplication.Switches
 			_lastExecuted = _closedCommand;
 			_closedCommand.Execute();
 		}
+		*/
 
 		public void FireCommand(ICommand command)
 		{
@@ -37,11 +39,13 @@ namespace CommandApplication.Switches
 			if (executor != null && executor.Equals(_lastExecuted))
 			{
 				Console.WriteLine($"Cannot execute {executor.GetType().Name} again");
+				return;
 			}
 			_lastExecuted = executor;
 			executor?.Execute();
 		}
 
+		/*
 		public void Open()
 		{
 			if(_lastExecuted == _openedCommand)
@@ -52,6 +56,7 @@ namespace CommandApplication.Switches
 			_lastExecuted = _openedCommand;
 			_openedCommand.Execute();
 		}
+		*/
 		public void AddCommand(ICommand command)
 		{
 			_commands.Add(command);

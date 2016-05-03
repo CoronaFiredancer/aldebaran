@@ -71,10 +71,12 @@ namespace CommandApplication
 					switch (input)
 					{
 						case "o":
-							ventil.Open();
+							//ventil.Open();
+							ventil.FireCommand(valveOpen);
 							break;
 						case "c":
-							ventil.Close();
+							//ventil.Close();
+							ventil.FireCommand(valveClose);
 							break;
 					}
 					input = Console.ReadLine();
