@@ -8,13 +8,14 @@ namespace CommandApplication.Switches
 	public class Switch : ISwitch
 	{
 		private ICommand _lastExecuted;
+		public List<ICommand> Commands { get; set; }
 		
-		public Switch()
+		public Switch(IEnumerable<ICommand> commands)
 		{
-			Commands = new List<ICommand>();
+			Commands = commands.ToList();
 			_lastExecuted = null;
 		}
-		public override void FireCommand(ICommand command)
+		public void FireCommand(ICommand command)
 		{
 			var executor = Commands.FirstOrDefault(x => x.Equals(command));
 			if (executor != null && executor.Equals(_lastExecuted))
@@ -26,11 +27,11 @@ namespace CommandApplication.Switches
 			executor?.Execute();
 		}
 
-		public override void AddCommand(ICommand command)
+		public void AddCommand(ICommand command)
 		{
 			Commands.Add(command);
 		}
-		public override void RemoveCommand(ICommand command)
+		public void RemoveCommand(ICommand command)
 		{
 			Commands.Remove(command);
 		}

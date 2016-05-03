@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="ClientExecutor.cs" />
     <Compile Include="Commands\CloseSwitch.cs" />
-    <Compile Include="Commands\Composite.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\Reset.cs" />
     <Compile Include="Containers\ContainerSetup.cs" />

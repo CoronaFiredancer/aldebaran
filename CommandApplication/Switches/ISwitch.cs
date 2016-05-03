@@ -3,11 +3,11 @@ using CommandApplication.Commands;
 
 namespace CommandApplication.Switches
 {
-	public abstract class ISwitch
+	public interface ISwitch
 	{
-		public List<ICommand> Commands;
-		public abstract void FireCommand(ICommand command);
-		public abstract void AddCommand(ICommand command);
-		public abstract void RemoveCommand(ICommand command);
+		void FireCommand(ICommand command);
+		void AddCommand(ICommand command);
+		void RemoveCommand(ICommand command);
+		List<ICommand> Commands { get; set; }
 	}
 }
