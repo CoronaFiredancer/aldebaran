@@ -36,12 +36,13 @@ namespace CommandApplication
 
 			}
 
-
+			List<ICommand> commandsList = commands.ToList();
 
 			//ISwitchable lamp = new Light();
-			ICommand switchClose = commands.First();
+			ICommand switchClose = commandsList[0];//.First();
 			switchClose.Switchable = lamp;// new CloseSwitch(lamp);
-			ICommand switchOpen = new OpenSwitch(lamp);
+			ICommand switchOpen = commandsList[1];// new OpenSwitch(lamp);
+			switchOpen.Switchable = lamp;
 
 			invoker = new Switch(switchClose, switchOpen);
 			var input = Console.ReadLine();

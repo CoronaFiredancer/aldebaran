@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Commands\CloseSwitch.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\Reset.cs" />
     <Compile Include="Containers\ContainerSetup.cs" />
     <Compile Include="Switchables\ISwitchable.cs" />
     <Compile Include="Switchables\Light.cs" />

@@ -4,5 +4,6 @@
 	{
 		void OpenTheSwitch();
 		void CloseTheSwitch();
+		void ResetTheSwitch();
 	}
 }

@@ -13,5 +13,10 @@ namespace CommandApplication.Switchables
 		{
 			Console.WriteLine("Valve is now closed");
 		}
+
+		public void ResetTheSwitch()
+		{
+			Console.WriteLine("Valve is now reset");
+		}
 	}
 }

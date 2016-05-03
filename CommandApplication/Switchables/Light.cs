@@ -13,5 +13,10 @@ namespace CommandApplication.Switchables
 		{
 			Console.WriteLine("The light is now turned off");
 		}
+
+		public void ResetTheSwitch()
+		{
+			Console.WriteLine("Light switch in middle position");
+		}
 	}
 }

@@ -18,6 +18,7 @@ namespace CommandApplication.Containers
 
 			_builder.RegisterType<CloseSwitch>().As<ICommand>();
 			_builder.RegisterType<OpenSwitch>().As<ICommand>().PreserveExistingDefaults();
+			_builder.RegisterType<Reset>().As<ICommand>().PreserveExistingDefaults();
 			//_builder.Register(s => )
 			_builder.RegisterType<Switch>()
 				.As<ISwitch>()
