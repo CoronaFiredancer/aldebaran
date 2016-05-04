@@ -35,6 +35,9 @@ namespace CommandApplication.Switches
 		{
 			Commands.Remove(command);
 		}
-
+		public void ClearCommands()
+		{
+			Commands.Clear();
+		}
 	}
 }

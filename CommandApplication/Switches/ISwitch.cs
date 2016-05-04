@@ -8,6 +8,7 @@ namespace CommandApplication.Switches
 		void FireCommand(ICommand command);
 		void AddCommand(ICommand command);
 		void RemoveCommand(ICommand command);
+		void ClearCommands();
 		List<ICommand> Commands { get; set; }
 	}
 }

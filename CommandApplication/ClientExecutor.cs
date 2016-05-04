@@ -20,6 +20,9 @@ namespace CommandApplication
 					case "c":
 						invoker.FireCommand(invoker.Commands[0]);
 						break;
+					case "m":
+						invoker.FireCommand(invoker.Commands[2]);
+						break;
 				}
 				input = Console.ReadLine();
 			}
